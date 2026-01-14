@@ -13,7 +13,7 @@ It can:
 
 - Generate **bitmap plots**
 
-- Provide a **fun, interactive terminal UI** via `ncurses`
+- Provide a **fun, interactive terminal UI** via `ncurses` (or `PDCurses`)
 
 ---
 
@@ -41,15 +41,39 @@ It can:
 
 - **C compiler** (C11 compatible)
 - [CMake](https://cmake.org/) ≥ 3.10
-- [ncurses](https://invisible-island.net/ncurses/)
+- [ncurses](https://invisible-island.net/ncurses/) for LInux/MacOS or [PDCurses](https://pdcurses.org/) for windows
 - [Cmocka](https://cmocka.org/) for testing (optional)
 
 ---
 
 ## 🛠️ Running the App
 
+### Linux/MacOS 
 ```bash
-git clone <repository_url>
+git clone https://github.com/JakubCzarnota/polynomial-tools-c.git
 cd PolynomialApp
 ./run.sh
 ```
+
+
+### Windows (experimental)
+```bash
+git clone https://github.com/JakubCzarnota/polynomial-tools-c.git
+cd PolynomialApp
+```
+
+To compile and run the project successfully, **PDCurses** must be built and placed in the expected directory structure.
+
+#### Directory Structure
+
+```text
+project/
+├─ external/
+│  └─ pdcurses/
+│     ├─ include/
+│     │  └─ (PDCurses header files)
+│     └─ lib/
+│        └─ pdcurses.lib
+└─ ...
+```
+Then the project can be compiled.
