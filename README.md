@@ -27,15 +27,11 @@ It can:
 
 - Generate **bitmap plots**
 
-<<<<<<< HEAD
   
 
 - Provide a **fun, interactive terminal UI** via `ncurses` (or `PDCurses`)
 
   
-=======
-- Provide a **fun, interactive terminal UI** via `ncurses` (or `PDCurses`)
->>>>>>> 73dfde7339cddaa374c55cc815d01845c5220311
 
 ---
 
@@ -77,13 +73,9 @@ It can:
 -  **C compiler** (C11 compatible)
 
 - [CMake](https://cmake.org/) ≥ 3.10
-<<<<<<< HEAD
 
 - [ncurses](https://invisible-island.net/ncurses/) for LInux/MacOS or [PDCurses](https://pdcurses.org/) for windows
 
-=======
-- [ncurses](https://invisible-island.net/ncurses/) for LInux/MacOS or [PDCurses](https://pdcurses.org/) for windows
->>>>>>> 73dfde7339cddaa374c55cc815d01845c5220311
 - [Cmocka](https://cmocka.org/) for testing (optional)
 
   
@@ -94,7 +86,6 @@ It can:
 
 ## 🛠️ Running the App
 
-<<<<<<< HEAD
   
 
 ### Linux/MacOS
@@ -105,17 +96,10 @@ git  clone  https://github.com/JakubCzarnota/polynomial-tools-c.git
 
 cd  PolynomialApp
 
-=======
-### Linux/MacOS 
-```bash
-git clone https://github.com/JakubCzarnota/polynomial-tools-c.git
-cd PolynomialApp
->>>>>>> 73dfde7339cddaa374c55cc815d01845c5220311
 ./run.sh
 
 ```
 
-<<<<<<< HEAD
 ### Windows (experimental)
 
 ```bash
@@ -137,27 +121,4 @@ project/
 
 ```
 
-=======
-
-### Windows (experimental)
-```bash
-git clone https://github.com/JakubCzarnota/polynomial-tools-c.git
-cd PolynomialApp
-```
-
-To compile and run the project successfully, **PDCurses** must be built and placed in the expected directory structure.
-
-#### Directory Structure
-
-```text
-project/
-├─ external/
-│  └─ pdcurses/
-│     ├─ include/
-│     │  └─ (PDCurses header files)
-│     └─ lib/
-│        └─ pdcurses.lib
-└─ ...
-```
->>>>>>> 73dfde7339cddaa374c55cc815d01845c5220311
 Then the project can be compiled.
