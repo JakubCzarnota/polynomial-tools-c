@@ -19,6 +19,8 @@
 #define MAX_EXPR 1024
 #define DELEY_SLEEP 500
 #define MAX_POLYNOMIAL_DEGREE 20
+#define MAX_POLYNOMIAL_COEFFICIENT 500
+#define MIN_POLYNOMIAL_COEFFICIENT -500
 
 static const char *POLY_LOGO[] = {
     "  _____   ____  _  __     ___   _  ____  __  __ _____          _                  _____  _____  ",
@@ -29,10 +31,10 @@ static const char *POLY_LOGO[] = {
     " |_|     \\____/|______|_|  |_| \\_|\\____/|_|  |_|_____/_/    \\_\\______|  /_/    \\_\\_|    |_|     "};
 #define POLY_LOGO_LINES 6
 
-void main_menu();
-void help_menu();
-void polynomial_menu();
-void draw_polynomial_plot_menu();
+void main_menu(void);
+void help_menu(void);
+void polynomial_menu(void);
+void draw_polynomial_plot_menu(void);
 
 Polynomial p1;
 Polynomial p2;
@@ -65,31 +67,17 @@ void set_escape_delay(int ms)
 #endif
 }
 
-bool validate_polynomial(int number)
+bool is_polynomial_valid(Polynomial *p)
 {
-    switch (number)
+    if (p->degree > MAX_POLYNOMIAL_DEGREE)
+        return false;
+
+    for (int i = 0; i < p->degree + 1; i++)
     {
-    case 1:
-        if (p1.degree > MAX_POLYNOMIAL_DEGREE)
-        {
-            free_polynomial(&p1);
-            polynomial1_defined = false;
-            poly1_formula[0] = '\0';
-            snprintf(message, sizeof(message), "Polynomial 1 degree too big");
+        if (p->coefficients[i] > MAX_POLYNOMIAL_COEFFICIENT || p->coefficients[i] < MIN_POLYNOMIAL_COEFFICIENT)
             return false;
-        }
-        break;
-    case 2:
-        if (p2.degree > MAX_POLYNOMIAL_DEGREE)
-        {
-            free_polynomial(&p2);
-            polynomial2_defined = false;
-            poly2_formula[0] = '\0';
-            snprintf(message, sizeof(message), "Polynomial 2 degree too big");
-            return false;
-        }
-        break;
     }
+
     return true;
 }
 
@@ -415,11 +403,16 @@ void polynomial_menu()
             if (selected_polynomial == 1)
             {
                 Polynomial new_poly = polynomial_add(&p1, &p2);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p1);
                 p1 = new_poly;
-
-                if (!validate_polynomial(1))
-                    break;
 
                 polynomial_find_properties(&p1);
 
@@ -430,11 +423,16 @@ void polynomial_menu()
             else if (selected_polynomial == 2)
             {
                 Polynomial new_poly = polynomial_add(&p2, &p1);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p2);
                 p2 = new_poly;
-
-                if (!validate_polynomial(2))
-                    break;
 
                 polynomial_find_properties(&p2);
 
@@ -451,11 +449,16 @@ void polynomial_menu()
             if (selected_polynomial == 1)
             {
                 Polynomial new_poly = polynomial_subtract(&p1, &p2);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p1);
                 p1 = new_poly;
-
-                if (!validate_polynomial(1))
-                    break;
 
                 polynomial_find_properties(&p1);
 
@@ -466,11 +469,16 @@ void polynomial_menu()
             else if (selected_polynomial == 2)
             {
                 Polynomial new_poly = polynomial_subtract(&p2, &p1);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p2);
                 p2 = new_poly;
-
-                if (!validate_polynomial(2))
-                    break;
 
                 polynomial_find_properties(&p2);
 
@@ -491,11 +499,16 @@ void polynomial_menu()
             {
 
                 Polynomial new_poly = polynomial_divide(&p1, &p2, &rest);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p1);
                 p1 = new_poly;
-
-                if (!validate_polynomial(1))
-                    break;
 
                 polynomial_find_properties(&p1);
 
@@ -506,11 +519,16 @@ void polynomial_menu()
             else if (selected_polynomial == 2)
             {
                 Polynomial new_poly = polynomial_divide(&p2, &p1, &rest);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p2);
                 p2 = new_poly;
-
-                if (!validate_polynomial(2))
-                    break;
 
                 polynomial_find_properties(&p2);
 
@@ -536,11 +554,16 @@ void polynomial_menu()
             if (selected_polynomial == 1)
             {
                 Polynomial new_poly = polynomial_multiply(&p1, &p2);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p1);
                 p1 = new_poly;
-
-                if (!validate_polynomial(1))
-                    break;
 
                 polynomial_find_properties(&p1);
 
@@ -551,11 +574,16 @@ void polynomial_menu()
             else if (selected_polynomial == 2)
             {
                 Polynomial new_poly = polynomial_multiply(&p2, &p1);
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
                 free_polynomial(&p2);
                 p2 = new_poly;
-
-                if (!validate_polynomial(2))
-                    break;
 
                 polynomial_find_properties(&p2);
 
@@ -577,7 +605,7 @@ void polynomial_menu()
 
             if (selected_polynomial == 1)
                 formula = poly1_formula;
-            else if (selected_polynomial == 2)
+            else
                 formula = poly2_formula;
 
             int len = strlen(formula);
@@ -590,38 +618,51 @@ void polynomial_menu()
 
             if (selected_polynomial == 1)
             {
-                if (polynomial1_defined)
-                    free_polynomial(&p1);
 
-                p1 = create_polynomial_from_formula(poly1_formula, message, sizeof(message));
-
-                if (!validate_polynomial(1))
-                    break;
+                Polynomial new_poly = create_polynomial_from_formula(poly1_formula, message, sizeof(message));
 
                 if (message[0] != '\0')
                 {
-                    polynomial1_defined = false;
+                    free_polynomial(&new_poly);
                     break;
                 }
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
+                if (polynomial1_defined)
+                    free_polynomial(&p1);
+
+                p1 = new_poly;
 
                 polynomial_find_properties(&p1);
                 polynomial1_defined = true;
             }
             else if (selected_polynomial == 2)
             {
-                if (polynomial2_defined)
-                    free_polynomial(&p2);
-
-                p2 = create_polynomial_from_formula(poly2_formula, message, sizeof(message));
-
-                if (!validate_polynomial(1))
-                    break;
+                Polynomial new_poly = create_polynomial_from_formula(poly2_formula, message, sizeof(message));
 
                 if (message[0] != '\0')
                 {
-                    polynomial2_defined = false;
+                    free_polynomial(&new_poly);
                     break;
                 }
+
+                if (!is_polynomial_valid(&new_poly))
+                {
+                    free_polynomial(&new_poly);
+                    snprintf(message, sizeof(message), "Polynomial too big");
+                    break;
+                }
+
+                if (polynomial2_defined)
+                    free_polynomial(&p2);
+
+                p2 = new_poly;
 
                 polynomial_find_properties(&p2);
                 polynomial2_defined = true;
