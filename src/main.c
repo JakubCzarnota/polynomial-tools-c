@@ -19,8 +19,8 @@
 #define MAX_EXPR 1024
 #define DELEY_SLEEP 500
 #define MAX_POLYNOMIAL_DEGREE 20
-#define MAX_POLYNOMIAL_COEFFICIENT 500
-#define MIN_POLYNOMIAL_COEFFICIENT -500
+#define MAX_POLYNOMIAL_COEFFICIENT 1000
+#define MIN_POLYNOMIAL_COEFFICIENT -1000
 
 static const char *POLY_LOGO[] = {
     "  _____   ____  _  __     ___   _  ____  __  __ _____          _                  _____  _____  ",
