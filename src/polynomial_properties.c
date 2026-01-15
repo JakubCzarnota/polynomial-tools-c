@@ -179,17 +179,6 @@ static void find_irrational_roots(Polynomial *p, const Polynomial *derivative)
 
 static void find_roots(Polynomial *p, const Polynomial *derivative)
 {
-    // if (p->root_count > -1)
-    //     return;
-
-    // if (p->roots)
-    // {
-    //     free(p->roots);
-    //     p->roots = NULL;
-    // }
-
-    // p->root_count = 0;
-
     if (p->degree == 0)
         return;
 
@@ -438,8 +427,6 @@ static void find_inflection_points(Polynomial *p, const Polynomial *second_deriv
     }
 
     point_array_list_sort_by_x(&p->inflection_points);
-
-    // free_polynomial(second_derivative);
 }
 
 static void find_concavity_intervals(Polynomial *p, const Polynomial *second_derivative)
@@ -484,9 +471,6 @@ static void find_concavity_intervals(Polynomial *p, const Polynomial *second_der
 
     interval_array_list_sort(&p->convex_intervals);
     interval_array_list_sort(&p->concave_intervals);
-
-    // free_polynomial(first_derivative);
-    // free_polynomial(second_derivative);
 }
 
 void polynomial_find_properties(Polynomial *p)

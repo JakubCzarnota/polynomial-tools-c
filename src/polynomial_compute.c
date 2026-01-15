@@ -14,7 +14,6 @@ double newton_raphson_polynomial(const Polynomial *p, const Polynomial *prime, d
 
         if (fabs(fpx) < 1e-12)
         {
-            // printf("Derivative too small, stopping.\n");
             break;
         }
 

@@ -117,7 +117,7 @@ void main_menu()
         int h, w;
         getmaxyx(stdscr, h, w);
 
-        /* --- Draw logo --- */
+        // Draw logo
         int logo_start_y = h / 2 - POLY_LOGO_LINES - 4;
         if (logo_start_y < 1)
             logo_start_y = 1;

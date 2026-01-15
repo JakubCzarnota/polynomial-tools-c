@@ -189,15 +189,9 @@ Polynomial polynomial_divide(const Polynomial *p1, const Polynomial *p2, Polynom
     while (poly_to_devide.degree >= p2->degree &&
            !polynomial_is_zero(&poly_to_devide))
     {
-        // print_polynomial(&poly_to_devide);
-
         Polynomial monomial = create_monomial(poly_to_devide.degree - p2->degree, poly_to_devide.coefficients[poly_to_devide.degree] / p2->coefficients[p2->degree]);
 
-        // print_polynomial(&monomial);
-
         Polynomial add_result = polynomial_add(&result, &monomial);
-
-        // print_polynomial(&add_result);
 
         free_polynomial(&result);
 
@@ -205,13 +199,9 @@ Polynomial polynomial_divide(const Polynomial *p1, const Polynomial *p2, Polynom
 
         Polynomial poly_to_subtract = polynomial_multiply(&monomial, p2);
 
-        // print_polynomial(&poly_to_subtract);
-
         free_polynomial(&monomial);
 
         Polynomial subtract_result = polynomial_subtract(&poly_to_devide, &poly_to_subtract);
-
-        // print_polynomial(&subtract_result);
 
         free_polynomial(&poly_to_devide);
         free_polynomial(&poly_to_subtract);
@@ -219,8 +209,6 @@ Polynomial polynomial_divide(const Polynomial *p1, const Polynomial *p2, Polynom
         poly_to_devide = subtract_result;
         normalize_polynomial(&poly_to_devide);
     }
-
-    // print_polynomial(&poly_to_devide);
 
     if (rest)
         *rest = poly_to_devide;
